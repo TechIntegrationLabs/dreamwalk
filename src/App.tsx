@@ -1,12 +1,8 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Attractions from './components/Attractions';
-import Characters from './components/Characters';
-import Events from './components/Events';
-import Gallery from './components/Gallery';
-import Shop from './components/Shop';
-import Tickets from './components/Tickets';
+import Welcome from './components/Welcome';
+import MediaCarousel from './components/MediaCarousel';
 import Contact from './components/Contact';
 
 function App() {
@@ -15,12 +11,8 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <Attractions />
-        <Characters />
-        <Events />
-        <Gallery />
-        <Shop />
-        <Tickets />
+        <Welcome />
+        <MediaCarousel />
         <Contact />
       </main>
     </div>

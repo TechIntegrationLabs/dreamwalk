@@ -1,39 +1,34 @@
 import React from 'react';
-import { ChevronDown, Ticket, Map } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import VideoBackground from './VideoBackground';
 
 const Hero = () => {
+  const scrollToContent = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <div className="relative min-h-screen">
-      {/* Video Background */}
+    <div className="relative h-screen">
       <VideoBackground />
-
-      {/* Content */}
-      <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-center px-4">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 hero-title animate-float font-cinzel">
-          Welcome to a new realm of wonder and imagination...
-        </h1>
-        
-        <p className="max-w-3xl text-lg md:text-xl text-white mb-8 opacity-90">
-          Our unique walking adventure guides you through diverse, meticulously crafted environments, 
-          each transporting you to a different world filled with captivating narratives and interactive exhibits.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <button className="px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold flex items-center justify-center hover:opacity-90 transition-all duration-300 hover:scale-105 hover-lift glow">
-            <Ticket className="w-5 h-5 mr-2" />
-            Buy Tickets
-          </button>
-          <button className="px-8 py-4 rounded-full glass text-white font-semibold flex items-center justify-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/10">
-            <Map className="w-5 h-5 mr-2" />
-            Explore the Park
-          </button>
-        </div>
-
-        <div className="absolute bottom-8 animate-bounce">
-          <ChevronDown className="w-8 h-8 text-white opacity-80" />
-        </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black"></div>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
+        {/* Hero content */}
       </div>
+
+      {/* Animated down arrow */}
+      <button
+        onClick={scrollToContent}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer group"
+        aria-label="Scroll down"
+      >
+        <div className="relative">
+          <ChevronDown className="w-12 h-12 text-white animate-bounce opacity-80 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 bg-white/10 rounded-full blur-lg group-hover:bg-white/20 transition-colors"></div>
+        </div>
+      </button>
     </div>
   );
 };
