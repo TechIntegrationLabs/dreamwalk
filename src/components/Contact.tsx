@@ -48,115 +48,123 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 bg-black" id="contact">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Get in Touch
-            </h2>
-            <p className="text-gray-400 mb-8">
-              Have questions about DreamWalk Park? We're here to help make
-              your visit magical. Reach out to us through any of these channels.
-            </p>
-            
-            <div className="space-y-6">
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
+    <section className="py-12 sm:py-20 bg-black">
+      <div className="relative isolate">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
+          <div className="relative px-4 sm:px-6 pb-12 sm:pb-20 pt-16 sm:pt-24 lg:static lg:px-8">
+            <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-6">Get in touch</h2>
+              <p className="text-base sm:text-lg leading-8 text-gray-300 mb-8">
+                Ready to experience DreamWalk? We'd love to hear from you.
+              </p>
+
+              <div className="space-y-8">
+                {/* Address */}
+                <div className="flex gap-x-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-purple-600">
+                    <MapPin className="h-5 w-5 text-white" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-white">Our Location</h3>
+                    <p className="mt-2 text-sm sm:text-base text-gray-400">
+                      University Place Mall<br />
+                      575 E University Pkwy<br />
+                      Orem, UT 84097
+                    </p>
+                    <a
+                      href="https://maps.app.goo.gl/dxWFTQhSNTtPBhMV9"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex items-center gap-2 text-sm sm:text-base text-purple-400 hover:text-purple-300"
+                    >
+                      <MapPin className="h-4 w-4" />
+                      Get Directions
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </div>
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-white font-semibold">Email</h3>
-                  <p className="text-gray-400">info@dreamwalk.com</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div className="ml-4">
-                  <h3 className="text-white font-semibold">Location</h3>
-                  <p className="text-gray-400">University Place Mall<br />575 E University Pkwy<br />Orem, UT 84097</p>
-                  <button
-                    onClick={handleGetDirections}
-                    className="mt-4 inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200 ease-in-out w-64"
-                  >
-                    <MapPin className="w-6 h-6" />
-                    Get Directions
-                    <ExternalLink className="w-5 h-5 ml-1" />
-                  </button>
+
+                {/* Email */}
+                <div className="flex gap-x-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-purple-600">
+                    <Mail className="h-5 w-5 text-white" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-white">Email</h3>
+                    <p className="mt-2 text-sm sm:text-base text-gray-400">
+                      dreamwalklabs@gmail.com
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-900 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">
-              Send Us a Message
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact Form */}
+          <div className="px-4 sm:px-6 lg:px-8 pb-12 sm:pb-20">
+            <form onSubmit={handleSubmit} className="mx-auto max-w-xl lg:mr-0 space-y-4 sm:space-y-6">
               <div>
-                <label className="block text-gray-300 mb-2">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full bg-gray-800 text-white rounded-lg py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  placeholder="Your name"
-                  required
-                />
+                <label htmlFor="name" className="block text-sm font-medium text-white">
+                  Name
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    autoComplete="name"
+                    className="block w-full rounded-md border-0 bg-black/30 px-4 py-3 text-white shadow-sm ring-1 ring-inset ring-purple-500/30 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-purple-500 sm:text-sm"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
               </div>
-              
               <div>
-                <label className="block text-gray-300 mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full bg-gray-800 text-white rounded-lg py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  placeholder="your@email.com"
-                  required
-                />
+                <label htmlFor="email" className="block text-sm font-medium text-white">
+                  Email
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    autoComplete="email"
+                    className="block w-full rounded-md border-0 bg-black/30 px-4 py-3 text-white shadow-sm ring-1 ring-inset ring-purple-500/30 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-purple-500 sm:text-sm"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
               </div>
-              
               <div>
-                <label className="block text-gray-300 mb-2">Message</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full bg-gray-800 text-white rounded-lg py-3 px-4 focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  placeholder="Your message..."
-                  required
-                />
+                <label htmlFor="message" className="block text-sm font-medium text-white">
+                  Message
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    className="block w-full rounded-md border-0 bg-black/30 px-4 py-3 text-white shadow-sm ring-1 ring-inset ring-purple-500/30 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-purple-500 sm:text-sm"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  />
+                </div>
               </div>
-              
-              <button
-                type="submit"
-                disabled={submitStatus === 'sending'}
-                className={`w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white hover:opacity-90 transition-opacity flex items-center justify-center ${
-                  submitStatus === 'sending' ? 'opacity-70 cursor-not-allowed' : ''
-                }`}
-              >
-                <Send className="w-4 h-4 mr-2" />
-                {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}
-              </button>
-
-              {submitStatus === 'success' && (
-                <p className="text-green-400 text-sm mt-2">Message sent successfully!</p>
-              )}
-              {submitStatus === 'error' && (
-                <p className="text-red-400 text-sm mt-2">Failed to send message. Please try again.</p>
-              )}
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center items-center gap-2 rounded-md bg-purple-600 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 transition-colors"
+                >
+                  <Send className="h-4 w-4" />
+                  Send Message
+                </button>
+              </div>
             </form>
           </div>
         </div>
+
         {/* Bottom Buy Tickets Button */}
-        <div className="mt-16 flex justify-center">
+        <div className="mt-12 sm:mt-16 flex justify-center px-4">
           <BuyTicketsButton className="transform hover:scale-125" />
         </div>
       </div>

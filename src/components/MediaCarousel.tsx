@@ -140,25 +140,27 @@ const MediaCarousel = () => {
   };
 
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
+    <section className="py-12 sm:py-20 bg-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative">
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 z-10 transform -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+            className="absolute left-2 sm:left-4 top-1/2 z-10 transform -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+            aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 z-10 transform -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+            className="absolute right-2 sm:right-4 top-1/2 z-10 transform -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+            aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </button>
 
           {/* Media Items */}
-          <div className="relative aspect-video overflow-hidden rounded-2xl">
+          <div className="relative aspect-video overflow-hidden rounded-lg sm:rounded-2xl">
             <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -175,12 +177,15 @@ const MediaCarousel = () => {
                       {isPlaying === item.id ? (
                         <YouTube
                           videoId={item.videoId}
-                          opts={youtubeOpts}
+                          opts={{
+                            ...youtubeOpts,
+                            playerVars: {
+                              ...youtubeOpts.playerVars,
+                              playsinline: 1
+                            }
+                          }}
                           onReady={(event) => {
                             playerRefs.current[item.id] = event.target;
-                          }}
-                          onEnd={(event) => {
-                            event.target.playVideo();
                           }}
                           className="w-full h-full"
                         />
@@ -189,6 +194,7 @@ const MediaCarousel = () => {
                           src={item.src}
                           alt={item.title}
                           className="w-full h-full object-cover"
+                          loading="lazy"
                         />
                       )}
                     </div>
@@ -197,6 +203,7 @@ const MediaCarousel = () => {
                       src={item.src}
                       alt={item.title}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   )}
                 </div>
@@ -205,16 +212,16 @@ const MediaCarousel = () => {
           </div>
 
           {/* Title and Description */}
-          <div className="mt-6 text-center">
-            <h3 className="text-2xl font-bold text-white mb-4 hover:text-purple-400 transition-colors cursor-pointer">
+          <div className="mt-4 sm:mt-6 text-center px-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 hover:text-purple-400 transition-colors">
               {mediaItems[activeIndex].title}
             </h3>
             
-            <div className="bg-gray-900/95 p-6 rounded-lg">
-              <p className="text-gray-300 mb-4">
+            <div className="bg-gray-900/95 p-4 sm:p-6 rounded-lg">
+              <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4">
                 {mediaItems[activeIndex].description}
               </p>
-              <div className="flex justify-between text-sm text-gray-400">
+              <div className="flex justify-between text-xs sm:text-sm text-gray-400">
                 <span>{mediaItems[activeIndex].source}</span>
                 <span>{mediaItems[activeIndex].date}</span>
               </div>
@@ -222,7 +229,7 @@ const MediaCarousel = () => {
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center space-x-2 mt-6">
+          <div className="flex justify-center space-x-1.5 sm:space-x-2 mt-4 sm:mt-6">
             {mediaItems.map((_, index) => (
               <button
                 key={index}
@@ -230,11 +237,12 @@ const MediaCarousel = () => {
                   cleanupPlayers();
                   setActiveIndex(index);
                 }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? 'bg-purple-500 w-6'
+                    ? 'bg-purple-500 w-4 sm:w-6'
                     : 'bg-gray-600 hover:bg-gray-500'
                 }`}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
